@@ -6,14 +6,29 @@ function changeFont(delta){
   $("#para").css("font-size",incremented + "px");
 }
 
-function addText(text, interval){
+function addText(text, delay){
+  console.log("sup");
   setTimeout(()=> {
-    $("#para").append(text[0]);
+    lowerCase();
+    var first = text[0];
+    console.log(`First char: ${first}`);
+    $("#para").append(first);
     var rest = text.slice(1);
     if (rest)
     {
-      addText(rest, interval);
+      addText(rest, delay);
+    }
+    else
+    {
+      setTimeout(lowerCase, delay);
     }
   },
-  interval);
+  delay);
+}
+
+function lowerCase()
+{
+  var originalText = $("#para").text();
+  var lowerCased = originalText.toLowerCase();
+  $("#para").text(lowerCased);
 }
